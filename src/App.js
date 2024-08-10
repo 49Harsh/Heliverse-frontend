@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Login from './components/Login';
+import Principal from './components/Principal';
+import Teacher from './components/Teacher';
+import Student from './components/Student';
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-blue-600 text-white p-4">
+        <h1 className="text-2xl font-bold">Classroom Website</h1>
       </header>
+      <main className="container mx-auto mt-8 p-4">
+        {!user ? (
+          <Login setUser={setUser} />
+        ) : user.role === 'principal' ? (
+          <Principal user={user} />
+        ) : user.role === 'teacher' ? (
+          <Teacher user={user} />
+        ) : (
+          <Student user={user} />
+        )}
+      </main>
     </div>
   );
 }
