@@ -20,9 +20,28 @@ export const createTimeTable = async (timeTableData) => {
   return response.data;
 };
 
-// principal create a table
-export const createClassroom = (name, teacherId, startTime, endTime, days) => 
-  axios.post(`${API_URL}/principal/create-classroom`, { name, teacherId, startTime, endTime, days });
+// // principal create a table
+// export const createClassroom = (name, teacherId, startTime, endTime, days) => 
+//   axios.post(`${API_URL}/principal/create-classroom`, { name, teacherId, startTime, endTime, days });
+
+// export const createClassroom = async (classroomData) => {
+//   try {
+//     const response = await axios.post(`${API_URL}/principal/create-classroom`, classroomData);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error creating classroom:', error);
+//     throw error;
+//   }
+// };
+
+export const createClassroom = async (classroomData) => {
+  try {
+    const response = await axios.post(`${API_URL}/principal/create-classroom`, classroomData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const createTeacher = (email, password) => 
   axios.post(`${API_URL}/principal/create-teacher`, { email, password });

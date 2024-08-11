@@ -1,13 +1,61 @@
 import React, { useState } from 'react';
 import { createClassroom, createTeacher, createStudent } from '../api';
 
+
 function Principal({ user }) {
-  // State for classroom creation
-  const [classroomName, setClassroomName] = useState('');
-  const [teacherId, setTeacherId] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
-  const [days, setDays] = useState([]);
+
+  
+
+
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   teacherId: '',
+  //   startTime: '',
+  //   endTime: '',
+  //   days: [],
+  // });
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({ ...prev, [name]: value }));
+  // };
+
+  // const handleDayChange = (day) => {
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     days: prev.days.includes(day)
+  //       ? prev.days.filter((d) => d !== day)
+  //       : [...prev.days, day],
+  //   }));
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const result = await createClassroom(formData);
+  //     console.log('Classroom created:', result);
+  //     // Handle success (e.g., show a success message, clear the form, etc.)
+  //   } catch (error) {
+  //     console.error('Error creating classroom:', error);
+  //     // Handle error (e.g., show an error message)
+  //   }
+  // };
+
+
+
+
+
+
+
+
+  // // State for classroom creation
+  // const [classroomName, setClassroomName] = useState('');
+  // const [teacherId, setTeacherId] = useState('');
+  // const [startTime, setStartTime] = useState('');
+  // const [endTime, setEndTime] = useState('');
+  // const [days, setDays] = useState([]);
+
+  // console.log(teacherId)
 
   // State for teacher creation
   const [teacherEmail, setTeacherEmail] = useState('');
@@ -18,30 +66,57 @@ function Principal({ user }) {
   const [studentPassword, setStudentPassword] = useState('');
   const [classroomId, setClassroomId] = useState('');
 
-  // Handle classroom creation
-  const handleCreateClassroom = async (e) => {
+
+
+  // // Handle classroom creation
+  const [formData, setFormData] = useState({
+    name: '',
+    teacherId: '',
+    student: [],
+    startTime: '',
+    endTime: '',
+    days: []
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleDaysChange = (e) => {
+    const { value, checked } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      days: checked 
+        ? [...prevState.days, value]
+        : prevState.days.filter(day => day !== value)
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const classroomData = {
-        name: classroomName,
-        teacher: teacherId,
-        startTime,
-        endTime,
-        days
-      };
-      await createClassroom(classroomData);
-      alert('Classroom created successfully');
-      // Clear form fields
-      setClassroomName('');
-      setTeacherId('');
-      setStartTime('');
-      setEndTime('');
-      setDays([]);
+      const result = await createClassroom(formData);
+      console.log('Classroom created:', result);
+      alert("classroom created ")
+      // handle error
+      
     } catch (error) {
       console.error('Error creating classroom:', error);
-      alert('Failed to create classroom: ' + (error.response?.data?.message || error.message));
+      alert("classroom not created ")
+      // handle error
     }
   };
+
+
+
+
+
+
+
 
   // Handle teacher creation
   const handleCreateTeacher = async (e) => {
@@ -81,66 +156,86 @@ function Principal({ user }) {
       {/* Classroom Creation Form */}
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h3 className="text-xl font-semibold mb-4">Create Classroom</h3>
-        <form onSubmit={handleCreateClassroom} className="space-y-4">
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            placeholder="Classroom Name"
-            value={classroomName}
-            onChange={(e) => setClassroomName(e.target.value)}
-            required
-          />
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            placeholder="Teacher ID"
-            value={teacherId}
-            onChange={(e) => setTeacherId(e.target.value)}
-            required
-          />
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="time"
-            placeholder="Start Time"
-            value={startTime}
-            onChange={(e) => setStartTime(e.target.value)}
-            required
-          />
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="time"
-            placeholder="End Time"
-            value={endTime}
-            onChange={(e) => setEndTime(e.target.value)}
-            required
-          />
-          <div>
-            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((day) => (
-              <label key={day} className="inline-flex items-center mr-4">
-                <input
-                  type="checkbox"
-                  className="form-checkbox"
-                  value={day}
-                  checked={days.includes(day)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setDays([...days, day]);
-                    } else {
-                      setDays(days.filter((d) => d !== day));
-                    }
-                  }}
-                />
-                <span className="ml-2">{day}</span>
-              </label>
-            ))}
-          </div>
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Create Classroom
-          </button>
-        </form>
+
+        <form onSubmit={handleSubmit} className="max-w-lg mx-auto mt-10">
+      <div className="mb-4">
+        <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Classroom Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="teacherId" className="block text-gray-700 text-sm font-bold mb-2">Teacher ID</label>
+        <input
+          type="text"
+          id="teacherId"
+          name="teacherId"
+          value={formData.teacherId}
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="startTime" className="block text-gray-700 text-sm font-bold mb-2">Start Time</label>
+        <input
+          type="time"
+          id="startTime"
+          name="startTime"
+          value={formData.startTime}
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="endTime" className="block text-gray-700 text-sm font-bold mb-2">End Time</label>
+        <input
+          type="time"
+          id="endTime"
+          name="endTime"
+          value={formData.endTime}
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">Days</label>
+        {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
+          <label key={day} className="inline-flex items-center mr-4">
+            <input
+              type="checkbox"
+              value={day}
+              checked={formData.days.includes(day)}
+              onChange={handleDaysChange}
+              className="form-checkbox h-5 w-5 text-blue-600"
+            />
+            <span className="ml-2 text-gray-700">{day}</span>
+          </label>
+        ))}
+      </div>
+
+      <div className="flex items-center justify-between">
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Create Classroom
+        </button>
+      </div>
+    </form>
+
       </div>
 
       {/* Teacher Creation Form */}
