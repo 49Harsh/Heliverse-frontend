@@ -1,61 +1,13 @@
 import React, { useState } from 'react';
 import { createClassroom, createTeacher, createStudent } from '../api';
 import TimetableInfo from './pages/TimetableInfo';
+import StudentList from './StudentList';
+import TeacherList from './TeacherList';
 
 function Principal({ user }) {
 
   
 
-
-  // const [formData, setFormData] = useState({
-  //   name: '',
-  //   teacherId: '',
-  //   startTime: '',
-  //   endTime: '',
-  //   days: [],
-  // });
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prev) => ({ ...prev, [name]: value }));
-  // };
-
-  // const handleDayChange = (day) => {
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     days: prev.days.includes(day)
-  //       ? prev.days.filter((d) => d !== day)
-  //       : [...prev.days, day],
-  //   }));
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const result = await createClassroom(formData);
-  //     console.log('Classroom created:', result);
-  //     // Handle success (e.g., show a success message, clear the form, etc.)
-  //   } catch (error) {
-  //     console.error('Error creating classroom:', error);
-  //     // Handle error (e.g., show an error message)
-  //   }
-  // };
-
-
-
-
-
-
-
-
-  // // State for classroom creation
-  // const [classroomName, setClassroomName] = useState('');
-  // const [teacherId, setTeacherId] = useState('');
-  // const [startTime, setStartTime] = useState('');
-  // const [endTime, setEndTime] = useState('');
-  // const [days, setDays] = useState([]);
-
-  // console.log(teacherId)
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
@@ -116,11 +68,6 @@ function Principal({ user }) {
       // handle error
     }
   };
-
-
-
-
-
 
 
 
@@ -333,14 +280,7 @@ function Principal({ user }) {
             onChange={(e) => setStudentPassword(e.target.value)}
             required
           />
-          {/* <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            placeholder="Classroom ID"
-            value={classroomId}
-            onChange={(e) => setClassroomId(e.target.value)}
-            required
-          /> */}
+
           <button
             className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
@@ -348,6 +288,11 @@ function Principal({ user }) {
             Create Student Account
           </button>
         </form>
+
+        
+        <TeacherList />
+        <StudentList />
+
       </div>
     </div>
   );

@@ -51,3 +51,23 @@ export const createStudent = (name, email, password) =>
 
 export const createTimetable = (teacherId, timetable) => 
   axios.post(`${API_URL}/teacher/create-timetable`, { teacherId, timetable });
+
+export const fetchTeachers = async () => {
+  const response = await axios.get(`${API_URL}/principal/show-teacher`);
+  return response.data;
+};
+
+export const fetchStudents = async () => {
+  const response = await axios.get(`${API_URL}/principal/show-student`);
+  return response.data;
+};
+
+export const deleteTeacher = async (id) => {
+  const response = await axios.delete(`${API_URL}/principal/teacher/${id}`);
+  return response.data;
+};
+
+export const deleteStudent = async (id) => {
+  const response = await axios.delete(`${API_URL}/principal//student/${id}`);
+  return response.data;
+};
