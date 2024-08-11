@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createClassroom, createTeacher, createStudent } from '../api';
-
+import TimetableInfo from './pages/TimetableInfo';
 
 function Principal({ user }) {
 
@@ -56,8 +56,12 @@ function Principal({ user }) {
   // const [days, setDays] = useState([]);
 
   // console.log(teacherId)
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   // State for teacher creation
+  const [showPopup, setShowPopup] = useState(false);
   const [teacherEmail, setTeacherEmail] = useState('');
   const [teacherPassword, setTeacherPassword] = useState('');
 
@@ -157,84 +161,107 @@ function Principal({ user }) {
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <h3 className="text-xl font-semibold mb-4">Create Classroom</h3>
 
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto mt-10">
-      <div className="mb-4">
-        <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Classroom Name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="teacherId" className="block text-gray-700 text-sm font-bold mb-2">Teacher ID</label>
-        <input
-          type="text"
-          id="teacherId"
-          name="teacherId"
-          value={formData.teacherId}
-          onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="startTime" className="block text-gray-700 text-sm font-bold mb-2">Start Time</label>
-        <input
-          type="time"
-          id="startTime"
-          name="startTime"
-          value={formData.startTime}
-          onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="endTime" className="block text-gray-700 text-sm font-bold mb-2">End Time</label>
-        <input
-          type="time"
-          id="endTime"
-          name="endTime"
-          value={formData.endTime}
-          onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          required
-        />
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2">Days</label>
-        {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
-          <label key={day} className="inline-flex items-center mr-4">
+            <form onSubmit={handleSubmit} className="max-w-lg mx-auto mt-10">
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Classroom Name</label>
             <input
-              type="checkbox"
-              value={day}
-              checked={formData.days.includes(day)}
-              onChange={handleDaysChange}
-              className="form-checkbox h-5 w-5 text-blue-600"
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
             />
-            <span className="ml-2 text-gray-700">{day}</span>
-          </label>
-        ))}
-      </div>
+          </div>
 
-      <div className="flex items-center justify-between">
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Create Classroom
-        </button>
-      </div>
-    </form>
+          <div className="mb-4">
+            <label htmlFor="teacherId" className="block text-gray-700 text-sm font-bold mb-2">Teacher ID</label>
+            <input
+              type="text"
+              id="teacherId"
+              name="teacherId"
+              value={formData.teacherId}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="student" className="block text-gray-700 text-sm font-bold mb-2">Student-ID</label>
+            <input
+              type="text"
+              id="student"
+              name="student"
+              value={formData.student}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="startTime" className="block text-gray-700 text-sm font-bold mb-2">Start Time</label>
+            <input
+              type="time"
+              id="startTime"
+              name="startTime"
+              value={formData.startTime}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="endTime" className="block text-gray-700 text-sm font-bold mb-2">End Time</label>
+            <input
+              type="time"
+              id="endTime"
+              name="endTime"
+              value={formData.endTime}
+              onChange={handleChange}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">Days</label>
+            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map(day => (
+              <label key={day} className="inline-flex items-center mr-4">
+                <input
+                  type="checkbox"
+                  value={day}
+                  checked={formData.days.includes(day)}
+                  onChange={handleDaysChange}
+                  className="form-checkbox h-5 w-5 text-blue-600"
+                />
+                <span className="ml-2 text-gray-700">{day}</span>
+              </label>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-between">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Create Classroom
+            </button>
+          </div>
+        </form>
+        {/* info popup */}
+        
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={togglePopup}
+          >
+            Show Info
+          </button>
+          {showPopup && <TimetableInfo togglePopup={togglePopup} />}
+        
 
       </div>
 
