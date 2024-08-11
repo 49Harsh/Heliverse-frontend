@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { login } from '../api';
+import LoginInfo from './pages/LoginInfo'
 
 function Login({ setUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPopup, setShowPopup] = useState(false);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,13 +56,24 @@ function Login({ setUser }) {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline "
               type="submit"
             >
               Sign In
             </button>
           </div>
+
+
+          
+
         </form>
+        <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8"
+            onClick={togglePopup}
+          >
+            Show Info
+          </button>
+          {showPopup && <LoginInfo togglePopup={togglePopup} />}
       </div>
     </div>
   );
