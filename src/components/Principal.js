@@ -61,14 +61,16 @@ function Principal({ user }) {
   };
 
   // State for teacher creation
+  const [teacherName, setTeacherName] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [teacherEmail, setTeacherEmail] = useState('');
   const [teacherPassword, setTeacherPassword] = useState('');
 
   // State for student creation
+  const [studentName, setStudentName] = useState('');
   const [studentEmail, setStudentEmail] = useState('');
   const [studentPassword, setStudentPassword] = useState('');
-  const [classroomId, setClassroomId] = useState('');
+ 
 
 
 
@@ -126,9 +128,9 @@ function Principal({ user }) {
   const handleCreateTeacher = async (e) => {
     e.preventDefault();
     try {
-      await createTeacher(teacherEmail, teacherPassword);
+      await createTeacher(teacherName, teacherEmail, teacherPassword);
       alert('Teacher account created successfully');
-      // Clear form fields
+      setTeacherName('');
       setTeacherEmail('');
       setTeacherPassword('');
     } catch (error) {
@@ -141,12 +143,13 @@ function Principal({ user }) {
   const handleCreateStudent = async (e) => {
     e.preventDefault();
     try {
-      await createStudent(studentEmail, studentPassword, classroomId);
+      await createStudent(studentName, studentEmail, studentPassword);
       alert('Student account created successfully');
       // Clear form fields
+      setStudentName('');
       setStudentEmail('');
       setStudentPassword('');
-      setClassroomId('');
+      // setClassroomId('');
     } catch (error) {
       console.error('Error creating student:', error);
       alert('Failed to create student account: ' + (error.response?.data?.message || error.message));
@@ -271,6 +274,14 @@ function Principal({ user }) {
         <form onSubmit={handleCreateTeacher} className="space-y-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            placeholder="Teacher Name"
+            value={teacherName}
+            onChange={(e) => setTeacherName(e.target.value)}
+            required
+          />
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="email"
             placeholder="Teacher Email"
             value={teacherEmail}
@@ -300,6 +311,14 @@ function Principal({ user }) {
         <form onSubmit={handleCreateStudent} className="space-y-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            type="text"
+            placeholder="Student Name"
+            value={studentName}
+            onChange={(e) => setStudentName(e.target.value)}
+            required
+          />
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="email"
             placeholder="Student Email"
             value={studentEmail}
@@ -314,14 +333,14 @@ function Principal({ user }) {
             onChange={(e) => setStudentPassword(e.target.value)}
             required
           />
-          <input
+          {/* <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             type="text"
             placeholder="Classroom ID"
             value={classroomId}
             onChange={(e) => setClassroomId(e.target.value)}
             required
-          />
+          /> */}
           <button
             className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"

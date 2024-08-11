@@ -43,11 +43,11 @@ export const createClassroom = async (classroomData) => {
   }
 };
 
-export const createTeacher = (email, password) => 
-  axios.post(`${API_URL}/principal/create-teacher`, { email, password });
+export const createTeacher = (name,email, password) => 
+  axios.post(`${API_URL}/principal/create-teacher`, {name, email, password });
 
-export const createStudent = (email, password, classroomId) => 
-  axios.post(`${API_URL}/principal/create-student`, { email, password, classroomId });
+export const createStudent = (name, email, password) => 
+  axios.post(`${API_URL}/principal/create-student`, {name, email, password });
 
 export const createTimetable = (teacherId, timetable) => 
   axios.post(`${API_URL}/teacher/create-timetable`, { teacherId, timetable });
