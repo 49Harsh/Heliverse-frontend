@@ -5,10 +5,14 @@ import Popup from './pages/Popup';
 const TeacherList = () => {
   const [teachers, setTeachers] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  
+
 
   useEffect(() => {
-    loadTeachers();
-  }, []);
+    if (isPopupOpen) {
+      loadTeachers();
+    }
+  }, [isPopupOpen]);
 
   const loadTeachers = async () => {
     const data = await fetchTeachers();

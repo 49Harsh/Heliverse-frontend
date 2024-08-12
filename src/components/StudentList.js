@@ -7,14 +7,16 @@ const StudentList = () => {
   const [students, setStudents] = useState([]);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  useEffect(() => {
-    loadStudents();
-  }, []);
-
   const loadStudents = async () => {
     const data = await fetchStudents();
     setStudents(data);
   };
+
+  useEffect(() => {
+    if (isPopupOpen) {
+      loadStudents();
+    }
+  }, [isPopupOpen]);
 
   const handleDelete = async (id) => {
     await deleteStudent(id);

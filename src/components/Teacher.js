@@ -7,7 +7,7 @@ const Teacher = () => {
 
   useEffect(() => {
     fetchTimeTable();
-  }, []);
+  },3000);
 
   const fetchTimeTable = async () => {
     try {
