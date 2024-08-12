@@ -68,9 +68,13 @@ function Login({ setUser }) {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-8"
             onClick={togglePopup}
           >
-            Show Info
+            How to Login
           </button>
           {showPopup && <LoginInfo togglePopup={togglePopup} />}
+          <div className='bg-green-500 rounded-md mt-4 bg-opacity-5'>
+          To return to the main page, please refresh the page. I haven’t implemented react-router-dom due to time constraints. If you give me more time, I will implement it. Thank you. This is the final project overview
+          </div>
+
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://heliverse-backend-eopp.onrender.com';
 
 export const login = (email, password) => axios.post(`${API_URL}/auth/login`, { email, password });
 
@@ -20,19 +20,6 @@ export const createTimeTable = async (timeTableData) => {
   return response.data;
 };
 
-// // principal create a table
-// export const createClassroom = (name, teacherId, startTime, endTime, days) => 
-//   axios.post(`${API_URL}/principal/create-classroom`, { name, teacherId, startTime, endTime, days });
-
-// export const createClassroom = async (classroomData) => {
-//   try {
-//     const response = await axios.post(`${API_URL}/principal/create-classroom`, classroomData);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error creating classroom:', error);
-//     throw error;
-//   }
-// };
 
 export const createClassroom = async (classroomData) => {
   try {

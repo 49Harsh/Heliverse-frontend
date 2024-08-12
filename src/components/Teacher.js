@@ -7,7 +7,7 @@ const Teacher = () => {
 
   useEffect(() => {
     fetchTimeTable();
-  },3000);
+  }, []);
 
   const fetchTimeTable = async () => {
     try {
@@ -35,7 +35,7 @@ const Teacher = () => {
 
   return (
     <div className="container mx-auto p-4">
-    {/* here teacher can create timetable */}
+    {/* here teacher can create time */}
       <h2 className="text-2xl font-bold mb-4">Create Time Table Entry</h2>
       <form onSubmit={handleSubmit} className="mb-8">
         <input

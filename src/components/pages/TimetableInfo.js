@@ -8,8 +8,8 @@ function TimetableInfo({ togglePopup }) {
         <p className="mb-4">
         To create a classroom, you will need the teacher and student IDs. You can copy and paste the provided IDs:
             <ul>
-                <li>Teacher ID: 66b76207101f0a0b538b3f81</li>
-                <li>Student ID: 66b8b061a6766040bd54cfe8</li>
+                <li>Teacher ID: 66b9acc0d06a76f60a2e9a73</li>
+                <li>Student ID: 66b9b07398a7374d03bc4497</li>
             </ul>
             
         </p>

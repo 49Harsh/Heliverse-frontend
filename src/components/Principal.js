@@ -124,7 +124,7 @@ function Principal({ user }) {
                 Create Classroom
               </button>
               <button type="button" onClick={togglePopup} className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-                Show Info
+                How to create Classroom
               </button>
             </div>
           </form>
