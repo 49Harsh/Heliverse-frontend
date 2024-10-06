@@ -57,6 +57,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
+Hi Sir,
+
+I have developed a school management system utilizing React.js and TailwindCSS for the front end, Node.js and Express.js for the back end, and MongoDB for the database. I have also successfully deployed the application. I will provide the link for your review.
+
 ### Advanced Configuration
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
